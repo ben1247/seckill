@@ -3,7 +3,7 @@ package org.seckill.entry;
 import java.util.Date;
 
 /**
- * Component:
+ * Component: 秒杀成功记录
  * Description:
  * Date: 16/6/6
  *
