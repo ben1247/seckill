@@ -93,4 +93,16 @@ public class Exposer {
     public void setStart(long start) {
         this.start = start;
     }
+
+    @Override
+    public String toString() {
+        return "Exposer{" +
+                "end=" + end +
+                ", exposed=" + exposed +
+                ", md5='" + md5 + '\'' +
+                ", now=" + now +
+                ", seckillId=" + seckillId +
+                ", start=" + start +
+                '}';
+    }
 }
