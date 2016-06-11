@@ -29,10 +29,10 @@ public class SeckillExecution {
         this.successKilled = successKilled;
     }
 
-    public SeckillExecution(String stateInfo, SeckillStatEnum statEnum, long seckillId) {
-        this.stateInfo = stateInfo;
-        this.state = statEnum.getState();
+    public SeckillExecution(long seckillId ,SeckillStatEnum statEnum) {
         this.seckillId = seckillId;
+        this.state = statEnum.getState();
+        this.stateInfo = statEnum.getStateInfo();
     }
 
     public long getSeckillId() {
