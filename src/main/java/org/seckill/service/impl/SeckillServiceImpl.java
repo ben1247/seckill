@@ -2,6 +2,7 @@ package org.seckill.service.impl;
 
 import org.seckill.dao.SeckillDao;
 import org.seckill.dao.SuccessKilledDao;
+import org.seckill.dao.cache.RedisDao;
 import org.seckill.dto.Exposer;
 import org.seckill.dto.SeckillExecution;
 import org.seckill.entry.Seckill;
@@ -39,6 +40,9 @@ public class SeckillServiceImpl implements SeckillService {
     @Autowired
     private SuccessKilledDao successKilledDao;
 
+    @Autowired
+    private RedisDao redisDao;
+
     private final String slat = "adfqwerjpasdfjlqwerasdf123498asdfl41";
 
     public List<Seckill> getSeckillList() {
@@ -46,7 +50,17 @@ public class SeckillServiceImpl implements SeckillService {
     }
 
     public Seckill getById(long seckillId) {
-        return seckillDao.queryById(seckillId);
+        // 优化点：缓存优化
+        Seckill seckill = redisDao.getSeckill(seckillId);
+        if(seckill == null){
+            // 缓存未命中，则访问数据库
+            seckill = seckillDao.queryById(seckillId);
+            if(seckill != null){
+                // 放入缓存中
+                redisDao.putSeckill(seckill);
+            }
+        }
+        return seckill;
     }
 
     public Exposer exportSeckillUrl(long seckillId) {
@@ -71,8 +85,7 @@ public class SeckillServiceImpl implements SeckillService {
 
     private String getMD5(long seckillId){
         String base = seckillId + "/" + slat;
-        String md5 = DigestUtils.md5DigestAsHex(base.getBytes());
-        return md5;
+        return DigestUtils.md5DigestAsHex(base.getBytes());
     }
 
 
