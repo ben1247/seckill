@@ -77,6 +77,35 @@ public class SeckillController {
         return result;
     }
 
+//    @RequestMapping(value = "/{seckillId}/{md5}/execution",
+//            method = RequestMethod.POST,
+//            produces = {"application/json;charset=UTF-8"})
+//    @ResponseBody
+//    public SeckillResult<SeckillExecution> execute(
+//            @PathVariable("seckillId")Long seckillId ,
+//            @PathVariable("md5")String md5,
+//            @CookieValue(value = "killPhone" , required = false)Long phone){
+//
+//        if(phone == null){
+//            return new SeckillResult<SeckillExecution>(false,"未注册");
+//        }
+//
+//        try {
+//            SeckillExecution execution = seckillService.executeSeckill(seckillId,phone,md5);
+//            return new SeckillResult<SeckillExecution>(true,execution);
+//        }catch (RepeatKillException e){
+//            SeckillExecution execution = new SeckillExecution(seckillId, SeckillStatEnum.REPEAT_KILL);
+//            return new SeckillResult<SeckillExecution>(true,execution);
+//        }catch (SeckillCloseException e){
+//            SeckillExecution execution = new SeckillExecution(seckillId, SeckillStatEnum.END);
+//            return new SeckillResult<SeckillExecution>(true,execution);
+//        }catch (Exception e){
+//            logger.error(e.getMessage(),e);
+//            SeckillExecution execution = new SeckillExecution(seckillId, SeckillStatEnum.INNER_ERROR);
+//            return new SeckillResult<SeckillExecution>(true,execution);
+//        }
+//    }
+
     @RequestMapping(value = "/{seckillId}/{md5}/execution",
             method = RequestMethod.POST,
             produces = {"application/json;charset=UTF-8"})
@@ -91,7 +120,7 @@ public class SeckillController {
         }
 
         try {
-            SeckillExecution execution = seckillService.executeSeckill(seckillId,phone,md5);
+            SeckillExecution execution = seckillService.executeSeckillProceduce(seckillId,phone,md5);
             return new SeckillResult<SeckillExecution>(true,execution);
         }catch (RepeatKillException e){
             SeckillExecution execution = new SeckillExecution(seckillId, SeckillStatEnum.REPEAT_KILL);
