@@ -1,3 +1,8 @@
 #秒杀系统
 ##描述
-使用springMVC+spring＋mybatis，数据库采用mysql，之后还会使用redis。敬请期待。。。
+使用springMVC+spring＋mybatis，数据库采用mysql，缓存使用redis。
+
+##优化
+* 首先将记录秒杀成功日志和减库存顺序颠倒，日志在前，减库存在后。目的是减少并发锁的等待（减库存会有并发锁）
+
+* 其次由于java客户端和mysql通讯时会有网络延迟、gc等性能问题，所以将日志和减库存的业务代码放到mysql的存储过程中。
