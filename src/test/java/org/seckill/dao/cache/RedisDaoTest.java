@@ -41,7 +41,8 @@ public class RedisDaoTest {
                 String result = redisDao.putSeckill(seckill);
                 System.out.println(result);
                 seckill = redisDao.getSeckill(id);
-                System.out.println(seckill);
+                System.out.print(seckill);
+                System.out.println();
             }
         }
     }
