@@ -44,7 +44,6 @@ public class RedisDaoTest {
                 System.out.println(seckill);
             }
         }
-        throw new RuntimeException("jenkins构建时做测试用，用完这段代码就删除");
     }
 
 }
