@@ -8,7 +8,7 @@
            http://www.springframework.org/schema/context
            http://www.springframework.org/schema/context/spring-context-3.2.xsd">
 
-    <!-- 扫描service包下所有使用注解的类型 -->
-    <context:component-scan base-package="org.seckill.listener" />
+    <!-- 扫描kafka包下所有使用注解的类型 -->
+    <context:component-scan base-package="org.seckill.kafka" />
 
 </beans>

@@ -149,6 +149,14 @@
       <artifactId>commons-collections</artifactId>
       <version>3.2</version>
     </dependency>
+
+    <!-- kafka  https://mvnrepository.com/artifact/org.apache.kafka/kafka-clients -->
+    <dependency>
+      <groupId>org.apache.kafka</groupId>
+      <artifactId>kafka-clients</artifactId>
+      <version>0.11.0.2</version>
+    </dependency>
+
   </dependencies>
 
 
