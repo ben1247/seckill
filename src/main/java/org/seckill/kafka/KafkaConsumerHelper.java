@@ -33,8 +33,8 @@ public class KafkaConsumerHelper implements InitializingBean, DisposableBean {
 
     @Override
     public void afterPropertiesSet() throws Exception {
-//        autoCommitSync();
-        manualCommitSync();
+        autoCommitSync();
+//        manualCommitSync();
 
     }
 
@@ -120,7 +120,9 @@ public class KafkaConsumerHelper implements InitializingBean, DisposableBean {
         props.put("value.deserializer", KafkaConstant.value_deserializer);
 
         consumer = new KafkaConsumer<>(props);
-        consumer.subscribe(Collections.singletonList("mytest"));
+
+        String topic = KafkaConstant.topic;
+        consumer.subscribe(Collections.singletonList(topic));
 
         initThreadPool();
 

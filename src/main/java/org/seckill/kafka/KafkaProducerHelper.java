@@ -48,7 +48,7 @@ public class KafkaProducerHelper implements InitializingBean, DisposableBean {
 
         producer = new KafkaProducer<>(props);
 
-        topic = "mytest";
+        topic = KafkaConstant.topic;
     }
 
     @Override
@@ -59,21 +59,30 @@ public class KafkaProducerHelper implements InitializingBean, DisposableBean {
     }
 
     public void setMessage(String key , String value){
-        producer.send(new ProducerRecord<>(topic,key,value),new Callback(){
+
+        try {
+//            producer.send(new ProducerRecord<>(topic,key,value));
+
+            producer.send(new ProducerRecord<>(topic,key,value),new Callback(){
 
             @Override
             public void onCompletion(RecordMetadata metadata, Exception e) {
                 if (e != null){
                     logger.error(String.format("send message onCompletion failure %s",e.getMessage()) ,e);
+                }else{
+                    long offset = metadata.offset();
+                    String topic = metadata.topic();
+                    int partition = metadata.partition();
+                    long timestamp = metadata.timestamp();
+                    Date date = new Date(timestamp);
+                    logger.info(String.format("send message onCompletion success, topic: %s , partition: %s , offset : %s , timestamp: %s",topic,partition,offset,date));
                 }
-                long offset = metadata.offset();
-                String topic = metadata.topic();
-                int partition = metadata.partition();
-                long timestamp = metadata.timestamp();
-                Date date = new Date(timestamp);
-//                logger.info(String.format("send message onCompletion success, topic: %s , partition: %s , offset : %s , timestamp: %s",topic,partition,offset,date));
-            }
-        });
+
+            }});
+        }catch (Exception e){
+            logger.error(e.getMessage(),e);
+        }
+
     }
 
 
