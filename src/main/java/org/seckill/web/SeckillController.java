@@ -146,4 +146,19 @@ public class SeckillController {
         return new SeckillResult<Long>(true,now.getTime());
     }
 
+    /**
+     * 测试事务
+     * @return
+     */
+    @RequestMapping(value = "/test/transaction",method = RequestMethod.GET)
+    @ResponseBody
+    public SeckillResult<Long> testTransaction(){
+        try {
+            seckillService.testTransaction();
+        } catch (RuntimeException e) {
+            e.printStackTrace();
+        }
+        return new SeckillResult<Long>(true,1L);
+    }
+
 }

@@ -53,4 +53,9 @@ public interface SeckillService {
      * @param md5
      */
     SeckillExecution executeSeckillProceduce(long seckillId , long userPhone , String md5);
+
+    /**
+     * 测试事务
+     */
+    void testTransaction() ;
 }

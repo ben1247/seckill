@@ -26,6 +26,7 @@ public class SeckillResult<T> {
         this.error = error;
     }
 
+
     public T getData() {
         return data;
     }

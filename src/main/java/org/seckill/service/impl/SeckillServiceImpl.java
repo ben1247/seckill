@@ -13,6 +13,8 @@ import org.seckill.exception.RepeatKillException;
 import org.seckill.exception.SeckillCloseException;
 import org.seckill.exception.SeckillException;
 import org.seckill.service.SeckillService;
+import org.seckill.service.TestTransaction1Service;
+import org.seckill.service.TestTransaction2Service;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -186,4 +188,17 @@ public class SeckillServiceImpl implements SeckillService {
         }
 
     }
+
+    @Autowired
+    private TestTransaction1Service testTransaction1Service;
+
+    @Autowired
+    private TestTransaction2Service testTransaction2Service;
+
+    @Transactional
+    public void testTransaction() {
+        testTransaction1Service.testSubTransaction();
+        testTransaction2Service.testSubTransaction();
+    }
+
 }
