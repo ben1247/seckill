@@ -157,6 +157,14 @@
       <version>0.11.0.2</version>
     </dependency>
 
+    <!-- 熔断 -->
+    <dependency>
+      <groupId>com.netflix.hystrix</groupId>
+      <artifactId>hystrix-core</artifactId>
+      <version>1.5.18</version>
+    </dependency>
+
+
   </dependencies>
 
 
